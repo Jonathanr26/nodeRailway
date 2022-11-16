@@ -1,8 +1,6 @@
 import express from "express";
 import { createPool } from "mysql2/promise";
 
-dotenv.config();
-
 const pool = createPool({
   user: "root",
   password: "azxohjFLjraihqHy6LHA",
