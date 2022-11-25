@@ -20,7 +20,7 @@ app.get("/users", async (req, res) => {
   res.json(result);
 });
 
-app.get("/agregarusuario", async (req, res) => {
+app.get("/adduser", async (req, res) => {
   const nombre = req.query.nombre;
   const contrasena = req.query.contrasena;
   const correo = req.query.correo;
@@ -28,6 +28,20 @@ app.get("/agregarusuario", async (req, res) => {
     `INSERT INTO usuario (nombre, contrasena, correo) VALUES ('${nombre}', '${contrasena}', '${correo}')`
   );
   res.json(result[0]);
+});
+
+// Un llamado login que le pases usuario y contraseña y te devuelva un estatus de ok si se pudo autenticar, o error sino se encuentra.
+app.get("/login", async (req, res) => {
+  const nombre = req.query.nombre;
+  const contrasena = req.query.contrasena;
+  const [result] = await pool.query(
+    `SELECT * FROM users WHERE nombre = '${nombre}' AND contrasena = '${contrasena}'`
+  );
+  if (result.length > 0) {
+    res.json({ status: "ok" });
+  } else {
+    res.json({ status: "error" });
+  }
 });
 
 app.listen(process.env.PORT || 3000);
