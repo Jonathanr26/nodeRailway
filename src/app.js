@@ -25,7 +25,7 @@ app.get("/adduser", async (req, res) => {
   const contrasena = req.query.contrasena;
   const correo = req.query.correo;
   const [result] = await pool.query(
-    `INSERT INTO usuario (nombre, contrasena, correo) VALUES ('${nombre}', '${contrasena}', '${correo}')`
+    `INSERT INTO users (nombre, contrasena, correo) VALUES ('${nombre}', '${contrasena}', '${correo}')`
   );
   res.json(result[0]);
 });
