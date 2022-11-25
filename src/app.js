@@ -15,8 +15,8 @@ app.get("/", (req, res) => {
   res.send("Bienvenido a este servidor..");
 });
 
-app.get("/usuarios", async (req, res) => {
-  const [result] = await pool.query("select * from usuario");
+app.get("/users", async (req, res) => {
+  const [result] = await pool.query("select * from users");
   res.json(result);
 });
 
@@ -24,9 +24,8 @@ app.get("/agregarusuario", async (req, res) => {
   const nombre = req.query.nombre;
   const contrasena = req.query.contrasena;
   const correo = req.query.correo;
-  const tienda = req.query.tienda;
   const [result] = await pool.query(
-    `INSERT INTO usuario (nombre, contrasena, correo, tienda) VALUES ('${nombre}', '${contrasena}', '${correo}','${tienda}')`
+    `INSERT INTO usuario (nombre, contrasena, correo) VALUES ('${nombre}', '${contrasena}', '${correo}')`
   );
   res.json(result[0]);
 });
